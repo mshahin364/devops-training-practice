@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-starter-app
+  labels:
+    app: mystarterapp
+    type: web
+spec:
+  containers:
+      - name: starter-app-ctr
+        image: shahinurislam/starter-app:1.0
+        ports:
+          - containerPort: 8080
+

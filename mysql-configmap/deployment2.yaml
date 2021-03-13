@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: brewski01
+          volumeMounts:
+            - mountPath: /test
+              name: my-config-map
+      volumes:
+        - name: my-config-map
+          configMap:
+            name: dbfile-config
+
+
+
+
+

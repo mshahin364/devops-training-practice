@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  database:
+    image: mysql:latest
+    container_name: mysql_db
+    hostname: mysql
+    restart: always
+    volumes:
+      - ./mysql_db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: brewski01
+      MYSQL_DATABASE: idea_db
+      MYSQL_USER: shahinur
+      MYSQL_PASSWORD: brewski01
+    ports:
+        - 6767:3306
+volumes:
+  mysql_db_data: {}

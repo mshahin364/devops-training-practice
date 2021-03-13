@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      initContainers:
+        - name: initdb
+          image: busybox:latest
+          volumeMounts:
+            - mountPath: /temp
+              name: init-image
+      containers:
+        - name: mysql
+          image: mysql:latest
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: brewski01
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d/
+              name: init-image
+      volumes:
+        - name: init-image
+          configMap:
+            name: dbfile-config
+            items:
+              - key: isseeddb-2021-03-08_02-29-27.sql.gz
+                path: isseeddb-2021-03-08_02-29-27.sql.gz
+
+
+
+
